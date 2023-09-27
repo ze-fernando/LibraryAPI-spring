@@ -1,10 +1,13 @@
 package com.library.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 @Entity @Table(name = "books")
 @Value
+@NoArgsConstructor(force = true)
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -24,4 +27,5 @@ public class Book {
 
     @Column(name = "publisher_id")
     Publisher publisher;
+
 }
