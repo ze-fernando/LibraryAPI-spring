@@ -2,6 +2,7 @@ package com.library.service;
 
 import com.library.domain.Book;
 import com.library.domain.Status;
+import com.library.models.ResponseJson;
 import com.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,16 @@ public class BookService {
         return b;
     }
 
-    public String delete(Long id){
+    public ResponseJson delete(Long id){
         repository.deleteById(id);
-        return "Deleted successful";
+        return new ResponseJson("Successful");
+    }
+
+    public ResponseJson rentBook(Long id){
+        Optional<Book> b = repository.findById(id);
+        if (b.isEmpty()) return new ResponseJson("Id does not exists");
+
+       return new ResponseJson("Book rented");
+
     }
 }

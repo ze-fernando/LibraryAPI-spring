@@ -1,6 +1,7 @@
 package com.library.service;
 
 import com.library.domain.Publisher;
+import com.library.models.ResponseJson;
 import com.library.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,9 @@ public class PublisherService {
         return p;
     }
 
-    public String delete(Long id){
+    public ResponseJson delete(Long id){
         repository.deleteById(id);
-        return "Deleted successful";
+        return new ResponseJson("Successful");
     }
 
 }

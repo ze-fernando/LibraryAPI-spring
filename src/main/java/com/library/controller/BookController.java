@@ -1,6 +1,7 @@
 package com.library.controller;
 
 import com.library.domain.Book;
+import com.library.models.ResponseJson;
 import com.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +28,16 @@ public class BookController {
 
     @PostMapping("/save")
     Book save(@RequestBody Book b){
-        bookService.save(b);
-        return b;
+        return bookService.save(b);
     }
 
     @DeleteMapping("/del/{id}")
-    String delete(@PathVariable Long id){
-        bookService.delete(id);
-        return "Successful";
+    ResponseJson delete(@PathVariable Long id){
+        return bookService.delete(id);
+    }
+
+    @PostMapping("/rent/{id}")
+    ResponseJson rent(@PathVariable Long id){
+        return bookService.rentBook(id);
     }
 }

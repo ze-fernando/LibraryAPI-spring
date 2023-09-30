@@ -1,6 +1,7 @@
 package com.library.controller;
 
 import com.library.domain.Publisher;
+import com.library.models.ResponseJson;
 import com.library.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class PublisherController {
     }
 
     @DeleteMapping("/del/{id}")
-    String deletePublisher(@PathVariable Long id){
+    ResponseJson deletePublisher(@PathVariable Long id){
         return publisherService.delete(id);
     }
 }
