@@ -2,9 +2,9 @@ package com.library.controller;
 
 import com.library.domain.Book;
 import com.library.domain.People;
-import com.library.models.ResponseJson;
 import com.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,22 +28,22 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    ResponseJson save(@RequestBody Book b){
+    ResponseEntity<Object> save(@RequestBody Book b){
         return bookService.save(b);
     }
 
     @DeleteMapping("/del/{id}")
-    ResponseJson delete(@PathVariable Long id){
+    ResponseEntity<Object> delete(@PathVariable Long id){
         return bookService.delete(id);
     }
 
     @PostMapping("/rent/{id}")
-    ResponseJson rent(@PathVariable Long id, @RequestBody People p){
+    ResponseEntity<?> rent(@PathVariable Long id, @RequestBody People p){
         return bookService.rentBook(id, p);
     }
 
     @PostMapping("/return/{id}")
-    ResponseJson returnBook(@PathVariable Long id){
+    ResponseEntity<Object> returnBook(@PathVariable Long id){
         return bookService.returnBook(id);
     }
 }

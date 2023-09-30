@@ -4,6 +4,8 @@ import com.library.domain.Publisher;
 import com.library.models.ResponseJson;
 import com.library.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,16 +25,15 @@ public class PublisherService {
         return repository.findById(id);
     }
 
-    public ResponseJson save(Publisher p){
+    public ResponseEntity<Object> save(Publisher p){
         var list = repository.findById(p.getId());
-        if (list.isEmpty()) return new ResponseJson("Id does not exists");
+        if (list.isEmpty()) ResponseJson.message("Id does not exists", HttpStatus.NOT_FOUND);
         repository.save(p);
-        return new ResponseJson("Successful");
-    }
+        return ResponseJson.message("Successful", HttpStatus.OK);    }
 
-    public ResponseJson delete(Long id){
+    public ResponseEntity<Object> delete(Long id){
         repository.deleteById(id);
-        return new ResponseJson("Successful");
+        return ResponseJson.message("Successful", HttpStatus.OK);
     }
 
 }

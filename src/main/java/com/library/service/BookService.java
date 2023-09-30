@@ -1,16 +1,16 @@
 package com.library.service;
 
+import com.library.Enums.Status;
 import com.library.Enums.Type;
 import com.library.domain.Book;
-import com.library.Enums.Status;
 import com.library.domain.People;
-import com.library.models.RentJson;
 import com.library.models.ResponseJson;
 import com.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,39 +29,42 @@ public class BookService {
     }
 
 
-    public ResponseJson save(Book b){
+    public ResponseEntity<Object> save(Book b){
         var list = repository.findById(b.getId());
-        if (list.isEmpty()) return new ResponseJson("Id does not exists");
+        if (list.isEmpty()) return ResponseJson.message("Id does not exists", HttpStatus.NOT_FOUND);
         if (b.getStatus() != Status.AVAILABLE) b.setStatus(Status.AVAILABLE);
         repository.save(b);
-        return new ResponseJson("Save successful");
+        return ResponseJson.json("Saved successful", HttpStatus.OK, b);
     }
 
-    public ResponseJson delete(Long id){
+    public ResponseEntity<Object> delete(Long id){
         var b = repository.findById(id);
-        if (b.isEmpty()) return new ResponseJson("Id does not exists");
+        if (b.isEmpty()) ResponseJson.message("Id does not exists", HttpStatus.NOT_FOUND);
         repository.deleteById(id);
-        return new ResponseJson("Successful");
+        return ResponseJson.message("Successful", HttpStatus.OK);
     }
 
-    public RentJson rentBook(Long id, People p){
+    public ResponseEntity<?> rentBook(Long id, People p){
         var b = repository.findById(id);
-        if (b.isEmpty()) return new ResponseJson("Id does not exists");
+        if (b.isEmpty()) return ResponseJson.message("Id does not exists", HttpStatus.NOT_FOUND);
         var book = b.get();
-        if (book.getStatus() == Status.RENTED) return new ResponseJson("The book already rented");
-        if (p.getType() == Type.PUBLISHER) return new ResponseJson("Only clients can rent a book");
+        if (book.getStatus() == Status.RENTED) return ResponseJson.
+                message("The book already rented", HttpStatus.BAD_REQUEST);
+        if (p.getType() == Type.PUBLISHER) return ResponseJson.
+                message("Only clients can rent a book", HttpStatus.BAD_REQUEST);
         book.setStatus(Status.RENTED);
         repository.save(book);
-        return new RentJson("Book rented", LocalDateTime.now(), LocalDateTime.now());
+        return ResponseJson.rented("Book rented", HttpStatus.OK);
     }
 
-    public ResponseJson returnBook(Long id){
+    public ResponseEntity<Object> returnBook(Long id){
         var b = repository.findById(id);
-        if (b.isEmpty()) return new ResponseJson("Id does not exists");
+        if (b.isEmpty()) ResponseJson.message("Id does not exists", HttpStatus.NOT_FOUND);
         var book = b.get();
-        if (book.getStatus() == Status.AVAILABLE) return new ResponseJson("The book already in library");
+        if (book.getStatus() == Status.AVAILABLE) return ResponseJson
+                .message("The book already in library", HttpStatus.BAD_REQUEST);
         book.setStatus(Status.AVAILABLE);
         repository.save(book);
-        return new ResponseJson("Book returned");
+        return ResponseJson.message("Book returned", HttpStatus.OK);
     }
 }

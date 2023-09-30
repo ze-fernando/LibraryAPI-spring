@@ -1,9 +1,9 @@
 package com.library.controller;
 
 import com.library.domain.Publisher;
-import com.library.models.ResponseJson;
 import com.library.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,12 +28,12 @@ public class PublisherController {
     }
 
     @PostMapping("/save")
-    ResponseJson savePublisher(@RequestBody Publisher p){
+    ResponseEntity<Object> savePublisher(@RequestBody Publisher p){
         return publisherService.save(p);
     }
 
     @DeleteMapping("/del/{id}")
-    ResponseJson deletePublisher(@PathVariable Long id){
+    ResponseEntity<Object> deletePublisher(@PathVariable Long id){
         return publisherService.delete(id);
     }
 }
