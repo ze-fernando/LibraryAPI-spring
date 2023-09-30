@@ -24,22 +24,18 @@ public class BookService {
         return repository.findById(id);
     }
 
-    public Book save(Book b){
+    public ResponseJson save(Book b){
+        Optional<Book> list = repository.findById(b.getId());
+        if (list.isEmpty()) return new ResponseJson("Id does not exists");
         if (b.getStatus() != Status.AVAILABLE) b.setStatus(Status.AVAILABLE);
         repository.save(b);
-        return b;
+        return new ResponseJson("Save successful");
     }
 
     public ResponseJson delete(Long id){
-        repository.deleteById(id);
-        return new ResponseJson("Successful");
-    }
-
-    public ResponseJson rentBook(Long id){
         Optional<Book> b = repository.findById(id);
         if (b.isEmpty()) return new ResponseJson("Id does not exists");
-
-       return new ResponseJson("Book rented");
-
+        repository.deleteById(id);
+        return new ResponseJson("Successful");
     }
 }

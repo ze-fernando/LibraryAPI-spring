@@ -27,17 +27,12 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    Book save(@RequestBody Book b){
+    ResponseJson save(@RequestBody Book b){
         return bookService.save(b);
     }
 
     @DeleteMapping("/del/{id}")
     ResponseJson delete(@PathVariable Long id){
         return bookService.delete(id);
-    }
-
-    @PostMapping("/rent/{id}")
-    ResponseJson rent(@PathVariable Long id){
-        return bookService.rentBook(id);
     }
 }

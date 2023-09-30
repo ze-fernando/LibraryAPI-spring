@@ -23,9 +23,11 @@ public class PublisherService {
         return repository.findById(id);
     }
 
-    public Publisher save(Publisher p){
+    public ResponseJson save(Publisher p){
+        Optional<Publisher> list = repository.findById(p.getId());
+        if (list.isEmpty()) return new ResponseJson("Id does not exists");
         repository.save(p);
-        return p;
+        return new ResponseJson("Successful");
     }
 
     public ResponseJson delete(Long id){
