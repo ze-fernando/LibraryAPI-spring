@@ -1,3 +1,3 @@
 package com.library.domain;
 
-enum Status {AVAILABLE, RENTED}
+public enum Status {AVAILABLE, RENTED}

@@ -2,30 +2,27 @@ package com.library.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 @Entity @Table(name = "books")
-@Value
+@Data
 @NoArgsConstructor(force = true)
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;
 
-    @Column(name = "name")
     String name;
 
-    @Column(name = "author")
     String author;
 
-    @Column(name = "year")
     Integer year;
 
-    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     Status status;
 
-    @Column(name = "publisher_id")
+    @ManyToOne
     Publisher publisher;
 
 }

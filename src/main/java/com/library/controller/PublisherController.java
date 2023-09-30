@@ -17,7 +17,7 @@ public class PublisherController {
     private PublisherService publisherService;
 
     @GetMapping("/find")
-    List<Publisher> ListAll(){
+    List<Publisher> listAll(){
         return publisherService.getAll();
     }
 
