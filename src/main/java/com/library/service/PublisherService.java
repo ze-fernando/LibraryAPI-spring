@@ -24,7 +24,7 @@ public class PublisherService {
     }
 
     public ResponseJson save(Publisher p){
-        Optional<Publisher> list = repository.findById(p.getId());
+        var list = repository.findById(p.getId());
         if (list.isEmpty()) return new ResponseJson("Id does not exists");
         repository.save(p);
         return new ResponseJson("Successful");

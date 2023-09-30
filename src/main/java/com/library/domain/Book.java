@@ -1,5 +1,6 @@
 package com.library.domain;
 
+import com.library.Enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Entity @Table(name = "books")
 @Data
+@AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

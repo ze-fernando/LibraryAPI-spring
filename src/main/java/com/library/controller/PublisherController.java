@@ -28,7 +28,7 @@ public class PublisherController {
     }
 
     @PostMapping("/save")
-    Publisher savePublisher(@RequestBody Publisher p){
+    ResponseJson savePublisher(@RequestBody Publisher p){
         return publisherService.save(p);
     }
 
