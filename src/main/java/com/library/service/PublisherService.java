@@ -27,4 +27,9 @@ public class PublisherService {
         return p;
     }
 
+    public String delete(Long id){
+        repository.deleteById(id);
+        return "Deleted successful";
+    }
+
 }

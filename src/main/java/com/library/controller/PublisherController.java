@@ -30,4 +30,9 @@ public class PublisherController {
     Publisher savePublisher(@RequestBody Publisher p){
         return publisherService.save(p);
     }
+
+    @DeleteMapping("/del/{id}")
+    String deletePublisher(@PathVariable Long id){
+        return publisherService.delete(id);
+    }
 }
