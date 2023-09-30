@@ -14,13 +14,17 @@ public class PublisherService {
     @Autowired
     private PublisherRepository repository;
 
-
     public List<Publisher> getAll(){
         return repository.findAll();
     }
 
     public Optional<Publisher> getById(Long id){
         return repository.findById(id);
-
     }
+
+    public Publisher save(Publisher p){
+        repository.save(p);
+        return p;
+    }
+
 }
