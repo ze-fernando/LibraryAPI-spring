@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Entity @Table(name = "books")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
-public class Book {
+public class Book implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;

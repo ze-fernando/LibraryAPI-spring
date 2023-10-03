@@ -22,14 +22,18 @@ public class PublisherService {
     }
 
     public Optional<Publisher> getById(Long id){
+        var list = repository.findById(id);
+        if (list.isEmpty()) ResponseJson.message("Id does not exists", HttpStatus.NOT_FOUND);
         return repository.findById(id);
     }
 
     public ResponseEntity<Object> save(Publisher p){
-        var list = repository.findById(p.getId());
-        if (list.isEmpty()) ResponseJson.message("Id does not exists", HttpStatus.NOT_FOUND);
+        var list = repository.findByName(p.getName());
+        if (!list.isEmpty()) return ResponseJson
+                .message("Publisher already exists", HttpStatus.BAD_REQUEST);
         repository.save(p);
-        return ResponseJson.message("Successful", HttpStatus.OK);    }
+        return ResponseJson.message("Successful", HttpStatus.OK);
+    }
 
     public ResponseEntity<Object> delete(Long id){
         repository.deleteById(id);

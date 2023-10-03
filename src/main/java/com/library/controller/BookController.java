@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.Enums.Type;
 import com.library.domain.Book;
 import com.library.domain.People;
 import com.library.service.BookService;
@@ -27,9 +28,9 @@ public class BookController {
         return bookService.getById(id);
     }
 
-    @PostMapping("/save")
-    ResponseEntity<Object> save(@RequestBody Book b){
-        return bookService.save(b);
+    @PostMapping("/save/{type}")
+    ResponseEntity<Object> save(@RequestBody Book b, @PathVariable Type type){
+        return bookService.save(b, type);
     }
 
     @DeleteMapping("/del/{id}")

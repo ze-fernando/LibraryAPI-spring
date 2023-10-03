@@ -6,6 +6,7 @@ import com.library.domain.Book;
 import com.library.domain.People;
 import com.library.models.ResponseJson;
 import com.library.repository.BookRepository;
+import com.library.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ public class BookService {
 
     @Autowired
     private BookRepository repository;
+    @Autowired
+    private PublisherRepository pubRep;
 
     public List<Book> getAll(){
         return repository.findAll();
@@ -28,11 +31,13 @@ public class BookService {
         return repository.findById(id);
     }
 
-
-    public ResponseEntity<Object> save(Book b){
-        var list = repository.findById(b.getId());
-        if (list.isEmpty()) return ResponseJson.message("Id does not exists", HttpStatus.NOT_FOUND);
-        if (b.getStatus() != Status.AVAILABLE) b.setStatus(Status.AVAILABLE);
+    public ResponseEntity<Object> save(Book b, Type t){
+        if (t != Type.PUBLISHER) return ResponseJson.message("Only publishers can save a book", HttpStatus.BAD_REQUEST);
+        var list = repository.findByName(b.getName());
+        if (!list.isEmpty()) return ResponseJson.message("The book already exists", HttpStatus.BAD_REQUEST);
+        b.setStatus(Status.AVAILABLE);
+        var publi = pubRep.findByName(b.getPublisher().getName());
+        if (publi.isEmpty()) return ResponseJson.message("Publisher invalid", HttpStatus.BAD_REQUEST);
         repository.save(b);
         return ResponseJson.json("Saved successful", HttpStatus.OK, b);
     }

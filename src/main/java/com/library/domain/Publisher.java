@@ -1,7 +1,6 @@
 package com.library.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 
@@ -17,6 +16,4 @@ public class Publisher implements Serializable {
     Long id;
 
     String name;
-
-
 }

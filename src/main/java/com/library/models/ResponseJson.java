@@ -27,7 +27,7 @@ public class ResponseJson {
         map.put("status", status.value());
         map.put("data", responseObj);
 
-        return new ResponseEntity<Object>(map,status);
+        return new ResponseEntity<Object>(map, status);
     }
 
     public static ResponseEntity<Object> message(String message, HttpStatus status){
@@ -35,7 +35,7 @@ public class ResponseJson {
         map.put("message", message);
         map.put("status", status.value());
 
-        return new ResponseEntity<Object>(map,status);
+        return new ResponseEntity<Object>(map, status);
     }
 
     public static ResponseEntity<Object> rented(String message, HttpStatus status){
@@ -43,8 +43,7 @@ public class ResponseJson {
         map.put("message", message);
         map.put("rented", dateRented);
         map.put("term", dateReturn);
-        map.put("status", status.value());
 
-        return new ResponseEntity<Object>(map,status);
+        return new ResponseEntity<Object>(map, status);
     }
 }

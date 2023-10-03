@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class People {
-    String name;
     @Enumerated(EnumType.STRING)
     Type type;
 }

@@ -3,4 +3,8 @@ package com.library.repository;
 import com.library.domain.Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PublisherRepository extends JpaRepository<Publisher, Long> {}
+import java.util.List;
+
+public interface PublisherRepository extends JpaRepository<Publisher, Long> {
+    List<Publisher> findByName(String name);
+}
