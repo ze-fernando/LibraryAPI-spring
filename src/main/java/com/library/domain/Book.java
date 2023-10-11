@@ -27,6 +27,7 @@ public class Book implements Serializable {
     Status status;
 
     @ManyToOne
+    @JoinColumn(name = "publisher_id")
     Publisher publisher;
 
 }

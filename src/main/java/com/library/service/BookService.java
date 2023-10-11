@@ -37,7 +37,8 @@ public class BookService {
         if (!list.isEmpty()) return ResponseJson.message("The book already exists", HttpStatus.BAD_REQUEST);
         b.setStatus(Status.AVAILABLE);
         var publi = pubRep.findByName(b.getPublisher().getName());
-        if (publi.isEmpty()) return ResponseJson.message("Publisher invalid", HttpStatus.BAD_REQUEST);
+        if (publi.isEmpty()) return ResponseJson.message(
+                "Publisher invalid, create publisher before create book", HttpStatus.BAD_REQUEST);
         repository.save(b);
         return ResponseJson.json("Saved successful", HttpStatus.OK, b);
     }
