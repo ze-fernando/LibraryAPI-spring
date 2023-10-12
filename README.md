@@ -67,8 +67,11 @@
   - Maven
  
   `git clone https://github.com/ze-fernando/LibraryAPI-spring`
+  
   `cd LibraryAPI-spring`
+  
   `docker-compose up`
+  
   `mvn spring-boot:run`
 
   >By ze-fernando
