@@ -3,17 +3,28 @@
 ### Routes
 
 **/book/find**
+
 **/book/find/{id}**
+
 **/book/save{type}**
+
 **/book/del/{id}**
+
 **/book/rent/{id}**
+
 **/book/return/{id}**
 
 
+
 **/publisher/find**
+
 **/publisher/find/{id}**
+
 **/publisher/save**
+
 **/publisher/del/{id}**
+
+
 
 ### Json
 
