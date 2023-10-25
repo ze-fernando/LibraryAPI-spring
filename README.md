@@ -36,6 +36,15 @@
 }
 ```
 
+*and the Api return*
+```yaml
+{
+    "message": "Book rented",
+    "rented": dateRented,
+    "term": dateReturn
+}
+```
+
 *For save a book*
 ```yml
 {
